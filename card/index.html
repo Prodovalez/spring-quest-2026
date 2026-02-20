@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💝 Для Варвары | 8 Марта</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: #0f0c29;
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            position: relative;
+            z-index: 10;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInDown 1s ease-out forwards;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: #ff85c1;
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInDown 1s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .typewriter-container {
+            min-height: 300px;
+            margin-bottom: 40px;
+        }
+
+        .typewriter-text {
+            font-size: 20px;
+            color: #fff;
+            line-height: 1.8;
+            opacity: 0;
+        }
+
+        .typewriter-text.active {
+            opacity: 1;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 24px;
+            background: #ff85c1;
+            margin-left: 2px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .interactive-flowers {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .flower-btn {
+            font-size: 50px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+            opacity: 0.5;
+        }
+
+        .flower-btn:hover {
+            transform: scale(1.2) rotate(10deg);
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .flower-btn.bloomed {
+            filter: grayscale(0%);
+            opacity: 1;
+            animation: bloom 0.5s ease-out;
+        }
+
+        @keyframes bloom {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.3);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .completion-message {
+            text-align: center;
+            font-size: 18px;
+            color: #ff85c1;
+            margin-top: 30px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .completion-message.show {
+            opacity: 1;
+        }
+
+        .floating-element {
+            position: fixed;
+            font-size: 30px;
+            animation: float 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(0) translateX(20px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-20px) translateX(10px) rotate(5deg);
+            }
+        }
+
+        .final-button {
+            display: block;
+            margin: 40px auto 0;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-family: 'Raleway', sans-serif;
+            color: white;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .final-button.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .final-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            text-align: center;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .title {
+                font-size: 36px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+            
+            .typewriter-text {
+                font-size: 16px;
+            }
+            
+            .flower-btn {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="floating-element" style="top: 10%; left: 10%; animation-delay: 0s;">🌸</div>
+    <div class="floating-element" style="top: 20%; right: 15%; animation-delay: 1s;">💐</div>
+    <div class="floating-element" style="bottom: 15%; left: 15%; animation-delay: 2s;">🌺</div>
+    <div class="floating-element" style="bottom: 25%; right: 10%; animation-delay: 1.5s;">🌷</div>
+
+    <div class="container">
+        <h1 class="title">С 8 Марта!</h1>
+        <p class="subtitle">Дорогая Варвара 💕</p>
+
+        <div class="typewriter-container">
+            <div class="typewriter-text" id="typewriter"></div>
+        </div>
+
+        <div class="completion-message" id="flowerHint">
+            ✨ Нажми на каждый цветок, чтобы оживить их ✨
+        </div>
+
+        <div class="interactive-flowers" id="flowers">
+            <button class="flower-btn" onclick="bloomFlower(this)">🌷</button>
+            <button class="flower-btn" onclick="bloomFlower(this)">🌸</button>
+            <button class="flower-btn" onclick="bloomFlower(this)">🌺</button>
+            <button class="flower-btn" onclick="bloomFlower(this)">🌻</button>
+            <button class="flower-btn" onclick="bloomFlower(this)">🌼</button>
+            <button class="flower-btn" onclick="bloomFlower(this)">💐</button>
+            <button class="flower-btn" onclick="bloomFlower(this)">🌹</button>
+            <button class="flower-btn" onclick="bloomFlower(this)">🏵️</button>
+        </div>
+
+        <button class="final-button" id="finalBtn" onclick="showFinal()">
+            🎁 Открыть финальное послание
+        </button>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>Моё солнышко! ☀️</h2>
+            <p>
+                Квест завершён! 🎉<br><br>
+                
+                Твой подарок ждёт тебя прямо сейчас...<br>
+                <strong>Оглянись вокруг!</strong><br><br>
+                
+                Люблю тебя! ❤️
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        const messages = [
+            "Сегодня твой день, и я хочу сказать...",
+            "",
+            "Ты делаешь мою жизнь ярче с каждым днём.",
+            "Ты — мой источник вдохновения и радости.",
+            "С тобой даже обычные дни становятся праздником.",
+            "",
+            "Спасибо, что ты есть в моей жизни! 🌸",
+            "",
+            "С праздником, моя весна! ✨"
+        ];
+
+        let messageIndex = 0;
+        let charIndex = 0;
+        const typewriterEl = document.getElementById('typewriter');
+        const typingSpeed = 50;
+        const lineDelay = 1000;
+
+        function typeWriter() {
+            if (messageIndex < messages.length) {
+                if (!typewriterEl.classList.contains('active')) {
+                    typewriterEl.classList.add('active');
+                }
+
+                if (charIndex < messages[messageIndex].length) {
+                    if (charIndex === 0) {
+                        typewriterEl.innerHTML += '<div class="line">';
+                    }
+                    
+                    const currentLine = typewriterEl.lastElementChild || typewriterEl;
+                    currentLine.textContent += messages[messageIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, typingSpeed);
+                } else {
+                    typewriterEl.innerHTML += '</div>';
+                    charIndex = 0;
+                    messageIndex++;
+                    setTimeout(typeWriter, lineDelay);
+                }
+            } else {
+                setTimeout(() => {
+                    document.getElementById('flowerHint').classList.add('show');
+                }, 500);
+            }
+        }
+
+        let bloomedCount = 0;
+        const totalFlowers = 8;
+
+        function bloomFlower(btn) {
+            if (!btn.classList.contains('bloomed')) {
+                btn.classList.add('bloomed');
+                bloomedCount++;
+                
+                createConfetti(btn.getBoundingClientRect());
+                
+                if (bloomedCount === totalFlowers) {
+                    setTimeout(() => {
+                        document.getElementById('finalBtn').classList.add('show');
+                        document.getElementById('flowerHint').textContent = 
+                            '🎉 Все цветы расцвели! Теперь открой финальное послание!';
+                    }, 500);
+                }
+            }
+        }
+
+        function createConfetti(rect) {
+            const colors = ['#ff69b4', '#ff1493', '#ff85c1', '#ffc0cb'];
+            for (let i = 0; i < 10; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = rect.left + rect.width / 2 + 'px';
+                confetti.style.top = rect.top + rect.height / 2 + 'px';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = '50%';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.zIndex = '999';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 2 + Math.random() * 3;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                document.body.appendChild(confetti);
+                
+                let x = 0, y = 0, opacity = 1;
+                const animation = setInterval(() => {
+                    x += vx;
+                    y += vy + 0.5;
+                    opacity -= 0.02;
+                    
+                    confetti.style.transform = `translate(${x}px, ${y}px)`;
+                    confetti.style.opacity = opacity;
+                    
+                    if (opacity <= 0) {
+                        clearInterval(animation);
+                        confetti.remove();
+                    }
+                }, 16);
+            }
+        }
+
+        function showFinal() {
+            document.getElementById('modal').classList.add('show');
+        }
+
+        window.addEventListener('load', () => {
+            createStars();
+            setTimeout(typeWriter, 500);
+        });
+    </script>
+</body>
+</html>
